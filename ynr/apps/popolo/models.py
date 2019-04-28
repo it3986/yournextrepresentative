@@ -37,6 +37,10 @@ class VersionNotFound(Exception):
     pass
 
 
+class NotStandingValidationError(ValueError):
+    pass
+
+
 class Organization(Dateframeable, Timestampable, models.Model):
     """
     A group with a common purpose or reason for existence that goes beyond the
@@ -314,7 +318,7 @@ class Membership(Dateframeable, Timestampable, models.Model):
                     '"{election}", but that\'s in {person} '
                     "({person_id})'s not_standing list."
                 )
-                raise Exception(
+                raise NotStandingValidationError(
                     msg.format(
                         election=self.post_election.election,
                         person=self.person.name,
