@@ -1,8 +1,6 @@
 import json
 import re
 
-from slugify import slugify
-
 from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -255,7 +253,7 @@ class CorrectNotStandingMergeView(
         for version in versions_json:
             try:
                 membership = version["data"]["standing_in"][election.slug]
-                if membership == None:
+                if membership is None:
                     return version
             except KeyError:
                 continue
